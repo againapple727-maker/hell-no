@@ -1,12 +1,22 @@
 <script>
 
-window.onload=startSequence;
+window.onload=()=>{
+startCountdown();
+};
 
-function startSequence(){
+const textContent = `Title = To My Problem ❤️
+
+ဟေ့ မင်္ဂလာညနေခင်းပါ ကိုယ့်ရဲ့ မရှိမဖြစ်လေးရယ်.......။
+
+ခုတလော အဆင်မပြေမူတွေ ကြောင့် တောင်းပန်ပါတယ်နော....
+
+ကိုယ့်မှာမင်းပဲ ရှိတာမို့ တစ်ခါတလေ အစိုးရိမ်လွန် အတွေးလွန်ပြီး
+ပြောမှားဆိုမှားတာတွေရှိရင် နားလည်ပေးပါ ❤️`;
+
+function startCountdown(){
 
 let count=3;
 let cd=document.getElementById("countdown");
-let msg=document.getElementById("message");
 
 let timer=setInterval(()=>{
 
@@ -17,7 +27,7 @@ if(count===0){
 clearInterval(timer);
 cd.style.display="none";
 
-showMessage();
+typeWriterEffect();
 
 setInterval(createHeart,120);
 
@@ -33,45 +43,61 @@ count--;
 
 }
 
-function showMessage(){
+function typeWriterEffect(){
 
 let msg=document.getElementById("message");
-
 msg.style.display="block";
-msg.style.opacity="1";
+
+let i=0;
+msg.innerHTML="";
+
+let speed=40;
+
+function typing(){
+if(i < textContent.length){
+msg.innerHTML += textContent.charAt(i);
+i++;
+setTimeout(typing, speed);
+}else{
 
 setTimeout(()=>{
 msg.style.transition="opacity 2s";
 msg.style.opacity="0";
-},2000);
 
 setTimeout(()=>{
 msg.style.display="none";
 showCloseScene();
-},4000);
+},2000);
 
+},2000);
+
+}
+}
+
+typing();
 }
 
 function showCloseScene(){
-let close=document.createElement("div");
-close.innerHTML="❤️ Always love you ❤️";
-close.style.fontSize="40px";
-close.style.position="absolute";
-close.style.textShadow="0 0 20px pink";
 
-document.body.appendChild(close);
+let close=document.getElementById("closeScene");
+close.style.display="block";
+
 }
 
 function createHeart(){
+
 let heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="💖";
+
 heart.style.left=Math.random()*100+"vw";
 heart.style.top="100vh";
 heart.style.fontSize=(15+Math.random()*30)+"px";
 
 document.body.appendChild(heart);
+
 setTimeout(()=>heart.remove(),6000);
+
 }
 
 </script>
