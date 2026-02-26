@@ -20,39 +20,40 @@ color:white;
 }
 
 #countdown{
-font-size:100px;
-text-shadow:0 0 25px pink;
+font-size:120px;
+text-shadow:0 0 30px pink;
+animation:fadeIn 1s;
 }
 
 #message{
-font-size:35px;
-display:none;
+font-size:32px;
 white-space:pre-line;
+opacity:0;
+animation:fadeIn 3s forwards;
+display:none;
 text-shadow:0 0 15px #ff4da6;
 }
 
-.button{
-position:absolute;
-bottom:50px;
-padding:12px 30px;
-border:none;
-border-radius:30px;
-background:#ff4da6;
-color:white;
-font-size:18px;
-cursor:pointer;
+.closeScene{
+display:none;
+font-size:40px;
+text-shadow:0 0 20px pink;
 }
 
 .heart{
 position:absolute;
-color:#ff3366;
 pointer-events:none;
-animation:float 5s linear forwards;
+animation:float 6s linear forwards;
 }
 
 @keyframes float{
 0%{transform:translateY(100vh) scale(0.5);opacity:1;}
 100%{transform:translateY(-10vh) scale(1.5);opacity:0;}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
 }
 
 </style>
@@ -68,36 +69,48 @@ animation:float 5s linear forwards;
 ခုတလော အဆင်မပြေတာတွေရှိခဲ့ရင် တောင်းပန်ပါတယ်။
 မင်းကို အရမ်းချစ်တယ် 💕
 မင်းကို ဂရုစိုက်ပေးချင်တယ်။
-နားလည်မူတွေ လွဲနေတာလေးတွေရှိရင်လည်း တောင်းပန်ပါတယ်။
-ကို့မှာမင်းပဲ ရှိတာမို့ တခါတလေ ကိုက အစိုးရိမ်လွန် အတွေးလွန်ပြိး
-ပြောမှားဆိုမှားတာလေးတွေရှိရင် နားလည်ပေးစေချင်တယ်...
-ဒီစာက မင်းအတွက်သီးသန့်လုပ်ထားတာမို့ မင်းလေးကိုပဲ ဖတ်စေချင်တယ်။
-ဒီနေ့လည်း မင်းကို အရမ်းလွမ်းတယ် သတိရတယ်.... အရမ်းချစ်ပါတယ်... ❤️
+ဒီစာက မင်းအတွက်သီးသန့်ပါ ❤️
 </div>
 
-<button class="button" onclick="startLove()">For You Only ❤️</button>
+<div class="closeScene" id="closeScene">
+❤️ Always love you ❤️
+</div>
 
-<audio id="bgm" loop>
-<source src="https://youtu.be/GxldQ9eX2wo" type="audio/mp3">
+<audio id="bgm" loop autoplay>
+<source src="https://www.youtube.com/embed/GxldQ9eX2wo">
 </audio>
 
 <script>
 
-function startLove(){
+window.onload=startSequence;
+
+function startSequence(){
 
 let count=3;
 let cd=document.getElementById("countdown");
 let msg=document.getElementById("message");
+let close=document.getElementById("closeScene");
 
 let timer=setInterval(()=>{
 
 cd.innerHTML=count;
 
 if(count===0){
+
 clearInterval(timer);
 cd.style.display="none";
+
 msg.style.display="block";
 setInterval(createHeart,120);
+
+setTimeout(()=>{
+msg.style.opacity="0";
+},8000);
+
+setTimeout(()=>{
+msg.style.display="none";
+close.style.display="block";
+},12000);
 
 setTimeout(()=>{
 document.getElementById("bgm").play().catch(()=>{});
@@ -120,7 +133,7 @@ heart.style.top="100vh";
 heart.style.fontSize=(15+Math.random()*30)+"px";
 
 document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),5000);
+setTimeout(()=>heart.remove(),6000);
 }
 
 </script>
