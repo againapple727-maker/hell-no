@@ -1,85 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Love ❤️</title>
-
-<style>
-
-body{
-margin:0;
-height:100vh;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-font-family:cursive;
-background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-color:white;
-}
-
-#countdown{
-font-size:120px;
-text-shadow:0 0 30px pink;
-animation:fadeIn 1s;
-}
-
-#message{
-font-size:18px;
-white-space:pre-line;
-opacity:0;
-animation:fadeIn 3s forwards;
-display:love emoji flying;
-text-shadow:0 0 15px #ff4da6;
-}
-
-.closeScene{
-display:none;
-font-size:40px;
-text-shadow:0 0 20px pink;
-}
-
-.heart{
-position:absolute;
-pointer-events:none;
-animation:float 3s linear forwards;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh) scale(0.5);opacity:1;}
-100%{transform:translateY(-10vh) scale(1.5);opacity:0;}
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-</style>
-</head>
-
-<body>
-
-<div id="countdown"></div>
-
-<div id="message">
-"To my problem" ❤️
-
-ခုတလော အဆင်မပြေတာတွေရှိခဲ့ရင် တောင်းပန်ပါတယ်။
-မင်းကို အရမ်းချစ်တယ် 💕
-မင်းကို ဂရုစိုက်ပေးချင်တယ်။
-ဒီစာက မင်းအတွက်သီးသန့်ပါ ❤️
-</div>
-
-<div class="closeScene" id="closeScene">
-❤️ Always love you ❤️
-</div>
-
-<audio id="bgm" loop autoplay>
-<source src="https://www.youtube.com/embed/GxldQ9eX2wo">
-</audio>
-
 <script>
 
 window.onload=startSequence;
@@ -89,7 +7,6 @@ function startSequence(){
 let count=3;
 let cd=document.getElementById("countdown");
 let msg=document.getElementById("message");
-let close=document.getElementById("closeScene");
 
 let timer=setInterval(()=>{
 
@@ -100,17 +17,9 @@ if(count===0){
 clearInterval(timer);
 cd.style.display="none";
 
-msg.style.display="block";
+showMessage();
+
 setInterval(createHeart,120);
-
-setTimeout(()=>{
-msg.style.opacity="0";
-},8000);
-
-setTimeout(()=>{
-msg.style.display="none";
-close.style.display="block";
-},12000);
 
 setTimeout(()=>{
 document.getElementById("bgm").play().catch(()=>{});
@@ -122,6 +31,35 @@ count--;
 
 },1000);
 
+}
+
+function showMessage(){
+
+let msg=document.getElementById("message");
+
+msg.style.display="block";
+msg.style.opacity="1";
+
+setTimeout(()=>{
+msg.style.transition="opacity 2s";
+msg.style.opacity="0";
+},2000);
+
+setTimeout(()=>{
+msg.style.display="none";
+showCloseScene();
+},4000);
+
+}
+
+function showCloseScene(){
+let close=document.createElement("div");
+close.innerHTML="❤️ Always love you ❤️";
+close.style.fontSize="40px";
+close.style.position="absolute";
+close.style.textShadow="0 0 20px pink";
+
+document.body.appendChild(close);
 }
 
 function createHeart(){
@@ -137,6 +75,3 @@ setTimeout(()=>heart.remove(),6000);
 }
 
 </script>
-
-</body>
-</html>
